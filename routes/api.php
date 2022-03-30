@@ -1,22 +1,27 @@
 <?php
 
-use App\Http\Controllers\TopicController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Subscribe\SubscribeController;
+use App\Http\Controllers\Subscribe\SubscriberTopicsController;
+use App\Http\Controllers\Subscribe\TopicSubscribersController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-Route::get('/topics', [TopicController::class, 'index']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'topics'], function () {
+    Route::get('/', [SubscriberTopicsController::class, 'index']);
+    Route::get('/{topic}/subscribers', [TopicSubscribersController::class, 'index']);
+
+    Route::post('/{topic}/subscribe', [SubscribeController::class, 'subscribe']);
+
+    Route::post('/{topic}/unsubscribe', [SubscribeController::class, 'unsubscribe']);
+    Route::post('/unsubscribe', [SubscribeController::class, 'unsubscribeAll']);
+});
+
+
+

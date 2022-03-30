@@ -17,7 +17,7 @@ class TopicFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->title(),
+            'title' => $this->faker->streetName(),
             'body'  => $this->faker->realText(),
         ];
     }
