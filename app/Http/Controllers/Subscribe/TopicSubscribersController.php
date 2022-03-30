@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Subscribe;
 
 use App\Http\Controllers\Controller;
+use App\Http\Queries\TopicSubscribersQuery;
 use App\Http\Requests\IndexTopicSubcribersRequest;
-
 use App\Http\Responses\UserStrategyResource;
 use App\Models\Topic;
-use App\Http\Queries\TopicSubscribersQuery;
 
 class TopicSubscribersController extends Controller
 {

@@ -5,9 +5,6 @@ namespace Tests\Feature;
 use App\Http\Controllers\Subscribe\SubscribeController;
 use App\Models\Topic;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class SubscribeTopicTest extends TestCase
